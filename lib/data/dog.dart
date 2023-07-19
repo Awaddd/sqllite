@@ -3,12 +3,12 @@ import 'package:sqflite/sqflite.dart';
 
 class Dogs {
   static String tableName = 'dogs';
-  final Database? db;
+  final Database db;
 
   Dogs(this.db);
 
-  static Future<void> createTable(Database database) async {
-    await database.execute(
+  Future<void> createTable() async {
+    await db.execute(
       '''
         CREATE TABLE IF NOT EXISTS $tableName (
           id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -19,7 +19,7 @@ class Dogs {
   }
 
   Future<List<Dog>> fetchAll() async {
-    final dogs = await db!.rawQuery(
+    final dogs = await db.rawQuery(
       '''
         SELECT * FROM $tableName;
       ''',
@@ -29,7 +29,7 @@ class Dogs {
   }
 
   Future<Dog> fetch(int id) async {
-    final dogs = await db!.rawQuery(
+    final dogs = await db.rawQuery(
       '''
         SELECT *
         FROM $tableName
@@ -41,7 +41,7 @@ class Dogs {
   }
 
   Future<int> create(String name) async {
-    return db!.rawInsert(
+    return db.rawInsert(
       '''
         INSERT INTO $tableName (name) VALUES (?)
       ''',
@@ -50,7 +50,7 @@ class Dogs {
   }
 
   Future<int> update(int id, String name) async {
-    return db!.rawUpdate(
+    return db.rawUpdate(
       '''
         UPDATE $tableName
         SET name = "$name"
@@ -60,7 +60,7 @@ class Dogs {
   }
 
   Future<int> delete(int id) async {
-    return db!.rawDelete(
+    return db.rawDelete(
       '''
         DELETE
         FROM $tableName

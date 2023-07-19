@@ -9,7 +9,7 @@ final databaseProvider = Provider((ref) async {
     join(await getDatabasesPath(), 'cat_database.db'),
     onCreate: (db, version) async {
       await db.execute('CREATE TABLE cats(id INTEGER PRIMARY KEY, name TEXT)');
-      await Dogs.createTable(db);
+      await Dogs(db).createTable();
     },
     version: 1,
   );
