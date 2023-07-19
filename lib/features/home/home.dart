@@ -33,6 +33,8 @@ class _HomeState extends ConsumerState<Home> {
 
         const Dogs(),
 
+        const SizedBox(height: lg),
+
         AppTextField(text: 'Alex...', controller: dog),
 
         const SizedBox(height: lg),
