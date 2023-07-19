@@ -37,10 +37,6 @@ class Dogs {
       ''',
     );
 
-    for (final dog in dogs) {
-      print('SQL dog ${dog['id']} ${dog['name']}');
-    }
-
     return Dog.fromLocalDatabase(dogs.first);
   }
 
