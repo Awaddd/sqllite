@@ -5,7 +5,6 @@ import 'package:salah_app/components/atoms/text_field.dart';
 import 'package:salah_app/core/utils/constants.dart';
 import 'package:salah_app/features/dogs/dogs.dart';
 import 'package:salah_app/state/dogs_state.dart';
-import 'package:salah_app/state/state.dart';
 
 class Home extends ConsumerStatefulWidget {
   const Home({super.key});

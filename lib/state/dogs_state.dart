@@ -1,6 +1,10 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:salah_app/controllers/dogs_controller.dart';
 import 'package:salah_app/models/dog.dart';
+
+final dogsTextControllers =
+    StateProvider<Map<int, TextEditingController>>((ref) => {});
 
 final dogsProvider = StateNotifierProvider<DogsNotifier, List<Dog>>((ref) {
   return DogsNotifier(ref);
