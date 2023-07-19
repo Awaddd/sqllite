@@ -1,0 +1,24 @@
+name: salah_app
+description: A new Flutter project.
+publish_to: "none"
+version: 0.1.0
+
+environment:
+  sdk: ">=3.0.1 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_riverpod: ^2.3.6
+  path: ^1.8.3
+  sqflite: ^2.2.8+4
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  lint: ^2.1.2
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/
