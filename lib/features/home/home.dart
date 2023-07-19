@@ -20,6 +20,7 @@ class _HomeState extends ConsumerState<Home> {
     if (dog.text.isEmpty) return;
     await ref.read(dogsProvider.notifier).create(dog.text);
     dog.clear();
+    FocusManager.instance.primaryFocus?.unfocus();
   }
 
   @override
