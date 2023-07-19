@@ -34,14 +34,17 @@ class DogsNotifier extends StateNotifier<List<Dog>> {
     final controller = DogsController(ref);
     await controller.update(id, name);
     final dog = await controller.fetch(id);
-    state[id - 1] = dog;
+
+    final index = state.indexWhere((element) => element.id == id);
+    state[index] = dog;
   }
 
   Future<void> delete(int id) async {
     await DogsController(ref).delete(id);
-
     final dogs = state.toList();
-    dogs.removeAt(id - 1);
+
+    final index = state.indexWhere((element) => element.id == id);
+    dogs.removeAt(index);
     state = dogs;
   }
 }
