@@ -27,4 +27,9 @@ class DogsController {
     final db = await ref.read(databaseProvider);
     return Dogs(db).update(id, name);
   }
+
+  Future<int> delete(int id) async {
+    final db = await ref.read(databaseProvider);
+    return Dogs(db).delete(id);
+  }
 }

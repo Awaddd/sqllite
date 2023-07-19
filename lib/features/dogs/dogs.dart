@@ -52,6 +52,10 @@ class _DogsState extends ConsumerState<Dogs> {
     });
   }
 
+  Future<void> deleteDog(int id) async {
+    await ref.read(dogsProvider.notifier).delete(id);
+  }
+
   @override
   Widget build(BuildContext context) {
     final dogs = ref.watch(dogsProvider);
@@ -81,18 +85,33 @@ class _DogsState extends ConsumerState<Dogs> {
           return ListTile(
             title: Text(dog.name),
             tileColor: Theme.of(context).colorScheme.secondary,
-            trailing: IconButton(
-              onPressed: () {
-                setState(() {
-                  editingState[dog.id] = true;
-                });
-              },
-              icon: const Icon(Icons.edit),
-              style: const ButtonStyle(
-                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-              ),
-              // padding: EdgeInsets.zero,
-              // constraints: const BoxConstraints(),
+            trailing: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                IconButton(
+                  onPressed: () {
+                    setState(() {
+                      editingState[dog.id] = true;
+                    });
+                  },
+                  icon: const Icon(Icons.edit),
+                  style: const ButtonStyle(
+                    tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                  ),
+                ),
+
+                //
+                const SizedBox(width: sm),
+
+                //
+                IconButton(
+                  onPressed: () => deleteDog(dog.id),
+                  icon: const Icon(Icons.delete),
+                  style: const ButtonStyle(
+                    tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                  ),
+                ),
+              ],
             ),
           );
         },

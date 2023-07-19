@@ -58,4 +58,14 @@ class Dogs {
       ''',
     );
   }
+
+  Future<int> delete(int id) async {
+    return db!.rawDelete(
+      '''
+        DELETE
+        FROM $tableName
+        WHERE id = "$id"
+      ''',
+    );
+  }
 }
