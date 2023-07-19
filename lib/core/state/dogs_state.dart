@@ -20,7 +20,7 @@ class DogsNotifier extends StateNotifier<List<Dog>> {
     return DogsController(ref).fetch(id);
   }
 
-  Future<void> create(String name) async {
+  Future<int> create(String name) async {
     final controller = DogsController(ref);
     final id = await controller.create(name);
     final dog = await controller.fetch(id);
@@ -28,6 +28,7 @@ class DogsNotifier extends StateNotifier<List<Dog>> {
     final dogs = state.toList();
     dogs.add(dog);
     state = dogs;
+    return id;
   }
 
   Future<void> update(int id, String name) async {

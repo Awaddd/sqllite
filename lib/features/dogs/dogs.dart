@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:salah_app/core/components/atoms/text_field.dart';
 import 'package:salah_app/core/state/dogs_state.dart';
+import 'package:salah_app/core/state/state.dart';
 import 'package:salah_app/core/utils/constants.dart';
 import 'package:salah_app/models/dog.dart';
 
@@ -17,7 +18,6 @@ class _DogsState extends ConsumerState<Dogs> {
   bool loading = true;
 
   Map<int, bool> editingState = {};
-  Map<int, TextEditingController> textEditingControllers = {};
 
   @override
   void initState() {
@@ -27,15 +27,15 @@ class _DogsState extends ConsumerState<Dogs> {
 
   Future<void> getDogs() async {
     final data = await ref.read(dogsProvider.notifier).fetchAll();
+    final textEditingControllers = ref.read(dogsTextControllers.notifier);
+
     final Map<int, TextEditingController> controllers = {};
 
     for (final dog in data) {
       controllers[dog.id] = TextEditingController();
     }
 
-    setState(() {
-      textEditingControllers = controllers;
-    });
+    textEditingControllers.state = controllers;
   }
 
   Future<void> updateDog(int id, String name) async {
@@ -59,6 +59,7 @@ class _DogsState extends ConsumerState<Dogs> {
   @override
   Widget build(BuildContext context) {
     final dogs = ref.watch(dogsProvider);
+    final textEditingControllers = ref.read(dogsTextControllers);
 
     return Expanded(
       child: ListView.separated(

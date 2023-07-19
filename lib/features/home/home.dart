@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:salah_app/core/components/atoms/button.dart';
 import 'package:salah_app/core/components/atoms/text_field.dart';
 import 'package:salah_app/core/state/dogs_state.dart';
+import 'package:salah_app/core/state/state.dart';
 import 'package:salah_app/core/utils/constants.dart';
 import 'package:salah_app/features/dogs/dogs.dart';
 
@@ -18,9 +19,12 @@ class _HomeState extends ConsumerState<Home> {
 
   Future<void> addDog() async {
     if (dog.text.isEmpty) return;
-    await ref.read(dogsProvider.notifier).create(dog.text);
+    final id = await ref.read(dogsProvider.notifier).create(dog.text);
     dog.clear();
     FocusManager.instance.primaryFocus?.unfocus();
+
+    final textEditingControllers = ref.read(dogsTextControllers.notifier);
+    textEditingControllers.state[id] = TextEditingController();
   }
 
   @override
