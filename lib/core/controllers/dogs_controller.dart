@@ -6,7 +6,7 @@ import 'package:salah_app/models/dog.dart';
 class DogsController {
   DogsController(this.ref);
 
-  final WidgetRef ref;
+  final Ref ref;
 
   Future<List<Dog>> fetchAll() async {
     final db = await ref.read(databaseProvider);

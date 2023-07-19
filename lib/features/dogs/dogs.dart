@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:salah_app/core/components/atoms/text_field.dart';
-import 'package:salah_app/core/controllers/dogs_controller.dart';
+import 'package:salah_app/core/state/dogs_state.dart';
 import 'package:salah_app/core/utils/constants.dart';
 import 'package:salah_app/models/dog.dart';
 
@@ -13,7 +13,6 @@ class Dogs extends ConsumerStatefulWidget {
 }
 
 class _DogsState extends ConsumerState<Dogs> {
-  List<Dog> dogs = [];
   String? error;
   bool loading = true;
 
@@ -27,39 +26,23 @@ class _DogsState extends ConsumerState<Dogs> {
   }
 
   Future<void> getDogs() async {
-    try {
-      final data = await DogsController(ref).fetchAll();
-      final Map<int, TextEditingController> controllers = {};
+    final data = await ref.read(dogsProvider.notifier).fetchAll();
+    final Map<int, TextEditingController> controllers = {};
 
-      for (final dog in data) {
-        controllers[dog.id] = TextEditingController();
-      }
-
-      setState(() {
-        dogs = data;
-        loading = false;
-        textEditingControllers = controllers;
-      });
-    } catch (err) {
-      setState(() {
-        error = 'Unexpected error';
-      });
+    for (final dog in data) {
+      controllers[dog.id] = TextEditingController();
     }
+
+    setState(() {
+      textEditingControllers = controllers;
+    });
   }
 
   Future<void> updateDog(int id, String name) async {
-    final controller = DogsController(ref);
-
-    await controller.update(id, name);
+    await ref.read(dogsProvider.notifier).update(id, name);
 
     setState(() {
       editingState[id] = false;
-    });
-
-    final dog = await controller.fetch(id);
-
-    setState(() {
-      dogs[id - 1] = dog;
     });
   }
 
@@ -71,15 +54,7 @@ class _DogsState extends ConsumerState<Dogs> {
 
   @override
   Widget build(BuildContext context) {
-    if (error != null) return Text(error ?? '');
-
-    if (loading) {
-      return const Expanded(
-        child: Center(
-          child: Text('loading...'),
-        ),
-      );
-    }
+    final dogs = ref.watch(dogsProvider);
 
     return Expanded(
       child: ListView.separated(
