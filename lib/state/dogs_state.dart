@@ -1,5 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:salah_app/core/controllers/dogs_controller.dart';
+import 'package:salah_app/controllers/dogs_controller.dart';
 import 'package:salah_app/models/dog.dart';
 
 final dogsProvider = StateNotifierProvider<DogsNotifier, List<Dog>>((ref) {

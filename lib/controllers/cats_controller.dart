@@ -1,10 +1,10 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:salah_app/core/state/state.dart';
-import 'package:salah_app/data/cat.dart';
+import 'package:salah_app/models/cat.dart';
+import 'package:salah_app/state/state.dart';
 import 'package:sqflite/sqflite.dart';
 
-class ApplicationController {
-  ApplicationController(this.ref);
+class CatsController {
+  CatsController(this.ref);
 
   final WidgetRef ref;
 

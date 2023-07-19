@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:salah_app/core/controllers/application_controller.dart';
-import 'package:salah_app/data/cat.dart';
+import 'package:salah_app/controllers/cats_controller.dart';
+import 'package:salah_app/models/cat.dart';
 
 class Cats extends ConsumerStatefulWidget {
   const Cats({super.key});
@@ -23,7 +23,7 @@ class _CatsState extends ConsumerState<Cats> {
 
   Future<void> getCats() async {
     try {
-      final data = await ApplicationController(ref).getAllCats();
+      final data = await CatsController(ref).getAllCats();
 
       setState(() {
         cats = data;

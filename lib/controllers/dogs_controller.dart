@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:salah_app/core/state/state.dart';
 import 'package:salah_app/data/dog.dart';
 import 'package:salah_app/models/dog.dart';
+import 'package:salah_app/state/state.dart';
 
 class DogsController {
   DogsController(this.ref);

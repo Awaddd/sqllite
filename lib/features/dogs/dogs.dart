@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:salah_app/core/components/atoms/text_field.dart';
-import 'package:salah_app/core/state/dogs_state.dart';
-import 'package:salah_app/core/state/state.dart';
+import 'package:salah_app/components/atoms/text_field.dart';
 import 'package:salah_app/core/utils/constants.dart';
 import 'package:salah_app/models/dog.dart';
+import 'package:salah_app/state/dogs_state.dart';
+import 'package:salah_app/state/state.dart';
 
 class Dogs extends ConsumerStatefulWidget {
   const Dogs({super.key});
